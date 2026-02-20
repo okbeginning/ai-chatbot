@@ -14,6 +14,9 @@ import { entitlementsByUserType } from "@/lib/ai/entitlements";
 import { type RequestHints, systemPrompt } from "@/lib/ai/prompts";
 import { getLanguageModel } from "@/lib/ai/providers";
 import { createDocument } from "@/lib/ai/tools/create-document";
+import { delegateToCodeAgent } from "@/lib/ai/tools/delegate-to-code-agent";
+import { delegateToResearchAgent } from "@/lib/ai/tools/delegate-to-research-agent";
+import { delegateToWritingAgent } from "@/lib/ai/tools/delegate-to-writing-agent";
 import { getWeather } from "@/lib/ai/tools/get-weather";
 import { requestSuggestions } from "@/lib/ai/tools/request-suggestions";
 import { updateDocument } from "@/lib/ai/tools/update-document";
@@ -151,6 +154,9 @@ export async function POST(request: Request) {
                 "createDocument",
                 "updateDocument",
                 "requestSuggestions",
+                "delegateToResearchAgent",
+                "delegateToCodeAgent",
+                "delegateToWritingAgent",
               ],
           providerOptions: isReasoningModel
             ? {
@@ -164,6 +170,9 @@ export async function POST(request: Request) {
             createDocument: createDocument({ session, dataStream }),
             updateDocument: updateDocument({ session, dataStream }),
             requestSuggestions: requestSuggestions({ session, dataStream }),
+            delegateToResearchAgent,
+            delegateToCodeAgent,
+            delegateToWritingAgent,
           },
           experimental_telemetry: {
             isEnabled: isProductionEnvironment,

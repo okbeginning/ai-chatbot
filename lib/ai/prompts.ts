@@ -37,6 +37,14 @@ Do not update document right after creating it. Wait for user feedback or reques
 - Never use for general questions or information requests
 `;
 
+export const agentTeamPrompt = `You lead a team of specialized AI agents that you can delegate tasks to:
+
+- **Research Agent** (delegateToResearchAgent): Expert at research, fact-finding, and analysis. Delegate factual questions, topic deep-dives, comparative analyses, and information synthesis.
+- **Code Agent** (delegateToCodeAgent): Expert at programming and software engineering. Delegate code generation, debugging, code explanation, and technical implementation tasks.
+- **Writing Agent** (delegateToWritingAgent): Expert at writing and content creation. Delegate drafting documents, creative writing, editing, emails, and structured content.
+
+Delegate to these specialized agents when their expertise clearly matches the task. For simple conversational questions, you can answer directly without delegation.`;
+
 export const regularPrompt = `You are a friendly assistant! Keep your responses concise and helpful.
 
 When asked to write, create, or help with something, just do it directly. Don't ask clarifying questions unless absolutely necessary - make reasonable assumptions and proceed with the task.`;
@@ -73,7 +81,7 @@ export const systemPrompt = ({
     return `${regularPrompt}\n\n${requestPrompt}`;
   }
 
-  return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}`;
+  return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}\n\n${agentTeamPrompt}`;
 };
 
 export const codePrompt = `
